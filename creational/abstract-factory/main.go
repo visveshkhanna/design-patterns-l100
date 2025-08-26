@@ -1,34 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func getThemeFactory(theme string) (ThemeFactory, error) {
+	if theme == "light" {
+		return &LightTheme{}, nil
+	}
+	if theme == "dark" {
+		return &DarkTheme{}, nil
+	}
+	return nil, fmt.Errorf("unknown theme: %s", theme)
+}
 
 func main() {
-    adidasFactory, _ := GetSportsFactory("adidas")
-    nikeFactory, _ := GetSportsFactory("nike")
+	light, _ := getThemeFactory("light")
+	dark, _ := getThemeFactory("dark")
 
-    nikeShoe := nikeFactory.makeShoe()
-    nikeShirt := nikeFactory.makeShirt()
+	render := func(name string, f ThemeFactory) {
+		btn := f.MakeButton()
+		card := f.MakeCard()
+		fmt.Println("--", name, "--")
+		fmt.Println(btn.Render())
+		fmt.Println(card.Render("Welcome", "Minimal themed UI"))
+	}
 
-    adidasShoe := adidasFactory.makeShoe()
-    adidasShirt := adidasFactory.makeShirt()
-
-    printShoeDetails(nikeShoe)
-    printShirtDetails(nikeShirt)
-
-    printShoeDetails(adidasShoe)
-    printShirtDetails(adidasShirt)
-}
-
-func printShoeDetails(s IShoe) {
-    fmt.Printf("Logo: %s", s.getLogo())
-    fmt.Println()
-    fmt.Printf("Size: %d", s.getSize())
-    fmt.Println()
-}
-
-func printShirtDetails(s IShirt) {
-    fmt.Printf("Logo: %s", s.getLogo())
-    fmt.Println()
-    fmt.Printf("Size: %d", s.getSize())
-    fmt.Println()
+	render("Light", light)
+	render("Dark", dark)
 }

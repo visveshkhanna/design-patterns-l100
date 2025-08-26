@@ -2,22 +2,22 @@ package main
 
 import "fmt"
 
-type Game interface {
-	initialize()
-	startPlay()
-	endPlay()
+type Delivery interface {
+	prepare()
+	dispatch()
+	report()
 }
 
-type GameTemplate struct{ game Game }
+type DeliveryTemplate struct{ d Delivery }
 
-func (g *GameTemplate) Play() {
-	g.game.initialize()
-	g.game.startPlay()
-	g.game.endPlay()
+func (t *DeliveryTemplate) Send() {
+	t.d.prepare()
+	t.d.dispatch()
+	t.d.report()
 }
 
-type Football struct{}
+type Webhook struct{}
 
-func (Football) initialize() { fmt.Println("Football Game Initialized!") }
-func (Football) startPlay()  { fmt.Println("Football Game Started. Enjoy the game!") }
-func (Football) endPlay()    { fmt.Println("Football Game Finished!") }
+func (Webhook) prepare()  { fmt.Println("resolving endpoint & payload") }
+func (Webhook) dispatch() { fmt.Println("POST /webhook -> 200 OK") }
+func (Webhook) report()   { fmt.Println("metrics: delivered") }

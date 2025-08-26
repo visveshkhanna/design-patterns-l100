@@ -3,10 +3,23 @@ package main
 import "fmt"
 
 func main() {
-	// (5 + 3) - 2 = 6
-	expr := &Subtract{
-		left:  &Add{left: &Number{value: 5}, right: &Number{value: 3}},
-		right: &Number{value: 2},
+	// Access Rule: (role==admin OR (beta AND region==EU)) AND requests<100
+	rule := &And{
+		left: &Or{
+			left:  &IsRole{role: "admin"},
+			right: &And{left: &IsBeta{}, right: &IsRegion{region: "EU"}},
+		},
+		right: &RequestsBelow{max: 100},
 	}
-	fmt.Println("Result:", expr.Interpret())
+
+	ctxs := []Ctx{
+		{Role: "admin", Region: "US", Beta: false, Requests: 12},
+		{Role: "user", Region: "EU", Beta: true, Requests: 2},
+		{Role: "user", Region: "EU", Beta: true, Requests: 120},
+		{Role: "user", Region: "US", Beta: false, Requests: 5},
+	}
+
+	for _, c := range ctxs {
+		fmt.Println(rule.Eval(&c))
+	}
 }

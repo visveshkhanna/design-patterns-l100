@@ -1,6 +1,6 @@
 package main
 
 func main() {
-	game := &GameTemplate{game: Football{}}
-	game.Play()
+	t := &DeliveryTemplate{d: Webhook{}}
+	t.Send()
 }

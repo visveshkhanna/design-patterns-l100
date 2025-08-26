@@ -1,25 +1,26 @@
 package main
 
 func main() {
-	editor := &Editor{}
+	field := &TextField{}
 	history := &History{}
 
-	editor.typeText("Hello ")
-	history.push(editor.save())
+	field.typeText("Hello ")
+	history.push(field.save())
 
-	editor.typeText("World")
-	history.push(editor.save())
+	field.typeText("World")
+	field.moveCursor(3)
+	history.push(field.save())
 
-	editor.typeText("!!!")
-	editor.print()
-
-	if m, ok := history.pop(); ok {
-		editor.restore(m)
-	}
-	editor.print()
+	field.typeText("!!!")
+	field.print()
 
 	if m, ok := history.pop(); ok {
-		editor.restore(m)
+		field.restore(m)
 	}
-	editor.print()
+	field.print()
+
+	if m, ok := history.pop(); ok {
+		field.restore(m)
+	}
+	field.print()
 }

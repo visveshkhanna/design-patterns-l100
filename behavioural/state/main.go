@@ -1,7 +1,8 @@
 package main
 
 func main() {
-	p := &Player{state: PausedState{}}
-	p.pressPlay() // Playing
-	p.pressPlay() // Pausing
+	d := &Document{state: Draft{}, title: "Proposal"}
+	d.submit()  // -> Review
+	d.approve() // -> Published
+	d.reject()  // noop
 }

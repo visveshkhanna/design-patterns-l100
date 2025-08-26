@@ -2,27 +2,43 @@ package main
 
 import "fmt"
 
-type EditorMemento struct{ content string }
+type Snapshot struct {
+	content string
+	cursor  int
+}
 
-type Editor struct{ content string }
+type TextField struct {
+	content string
+	cursor  int
+}
 
-type History struct{ stack []EditorMemento }
+type History struct{ stack []Snapshot }
 
-func (e *Editor) typeText(text string) { e.content += text }
+func (t *TextField) typeText(text string) { t.content += text; t.cursor = len(t.content) }
 
-func (e *Editor) save() EditorMemento { return EditorMemento{content: e.content} }
+func (t *TextField) moveCursor(pos int) {
+	if pos < 0 {
+		pos = 0
+	}
+	if pos > len(t.content) {
+		pos = len(t.content)
+	}
+	t.cursor = pos
+}
 
-func (e *Editor) restore(m EditorMemento) { e.content = m.content }
+func (t *TextField) save() Snapshot { return Snapshot{content: t.content, cursor: t.cursor} }
 
-func (h *History) push(m EditorMemento) { h.stack = append(h.stack, m) }
+func (t *TextField) restore(m Snapshot) { t.content, t.cursor = m.content, m.cursor }
 
-func (h *History) pop() (EditorMemento, bool) {
+func (h *History) push(m Snapshot) { h.stack = append(h.stack, m) }
+
+func (h *History) pop() (Snapshot, bool) {
 	if len(h.stack) == 0 {
-		return EditorMemento{}, false
+		return Snapshot{}, false
 	}
 	m := h.stack[len(h.stack)-1]
 	h.stack = h.stack[:len(h.stack)-1]
 	return m, true
 }
 
-func (e *Editor) print() { fmt.Println("Content:", e.content) }
+func (t *TextField) print() { fmt.Printf("Content: %q, cursor: %d\n", t.content, t.cursor) }

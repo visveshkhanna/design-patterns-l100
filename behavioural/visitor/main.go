@@ -1,9 +1,9 @@
 package main
 
 func main() {
-	shapes := []Element{&Circle{radius: 3}, &Square{side: 4}}
-	visitor := AreaCalculator{}
-	for _, s := range shapes {
-		s.accept(visitor)
+	zones := []Element{&Forest{trees: 120}, &City{buildings: 45}}
+	printer := MapPrinter{}
+	for _, z := range zones {
+		z.accept(printer)
 	}
 }
