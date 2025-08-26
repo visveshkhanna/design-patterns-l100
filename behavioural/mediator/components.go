@@ -1,19 +1,23 @@
 package main
 
-type Button struct {
+type Fan struct {
 	mediator Mediator
-	enabled  bool
+	onState  bool
 }
 
-type Input struct {
+type Heater struct {
 	mediator Mediator
-	enabled  bool
+	onState  bool
 }
 
-func (b *Button) click() { b.mediator.notify("button", "click") }
+type Sensor struct{ mediator Mediator }
 
-func (b *Button) disable() { b.enabled = false }
+func (f *Fan) on()  { f.onState = true }
+func (f *Fan) off() { f.onState = false }
 
-func (i *Input) change() { i.mediator.notify("input", "change") }
+func (h *Heater) on()  { h.onState = true }
+func (h *Heater) off() { h.onState = false }
 
-func (i *Input) enable() { i.enabled = true }
+func (s *Sensor) tempHot()  { s.mediator.notify("sensor", "hot") }
+func (s *Sensor) tempCold() { s.mediator.notify("sensor", "cold") }
+func (s *Sensor) tempOk()   { s.mediator.notify("sensor", "ok") }

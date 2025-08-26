@@ -2,18 +2,22 @@ package main
 
 import "fmt"
 
-type SortStrategy interface{ sort([]int) }
+type PricingStrategy interface {
+	price(distanceKm float64) float64
+}
 
-type BubbleSort struct{}
+type Economy struct{}
 
-type QuickSort struct{}
+type Premium struct{}
 
-func (BubbleSort) sort(arr []int) { fmt.Println("BubbleSort:", arr) }
+func (Economy) price(distanceKm float64) float64 { return 1.0 + 0.8*distanceKm }
 
-func (QuickSort) sort(arr []int) { fmt.Println("QuickSort:", arr) }
+func (Premium) price(distanceKm float64) float64 { return 3.0 + 1.2*distanceKm }
 
-type Sorter struct{ strategy SortStrategy }
+type Ride struct{ strategy PricingStrategy }
 
-func (s *Sorter) setStrategy(st SortStrategy) { s.strategy = st }
+func (r *Ride) setStrategy(st PricingStrategy) { r.strategy = st }
 
-func (s *Sorter) sort(arr []int) { s.strategy.sort(arr) }
+func (r *Ride) quote(distanceKm float64) float64 { return r.strategy.price(distanceKm) }
+
+func (r *Ride) printQuote(distanceKm float64) { fmt.Println("$", r.quote(distanceKm)) }

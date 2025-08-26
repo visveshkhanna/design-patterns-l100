@@ -1,20 +1,25 @@
 package main
 
-type IntCollection struct{ items []int }
-
-type IntIterator struct {
-	collection *IntCollection
-	index      int
+type LogEntry struct {
+	Level string
+	Msg   string
 }
 
-func (c *IntCollection) createIterator() *IntIterator {
-	return &IntIterator{collection: c, index: 0}
+type Log struct{ entries []LogEntry }
+
+type LogIterator struct {
+	log   *Log
+	index int
 }
 
-func (it *IntIterator) hasNext() bool { return it.index < len(it.collection.items) }
+func (l *Log) createIterator() *LogIterator {
+	return &LogIterator{log: l, index: 0}
+}
 
-func (it *IntIterator) next() int {
-	val := it.collection.items[it.index]
+func (it *LogIterator) hasNext() bool { return it.index < len(it.log.entries) }
+
+func (it *LogIterator) next() LogEntry {
+	val := it.log.entries[it.index]
 	it.index++
 	return val
 }

@@ -1,5 +1,6 @@
 package main
 
-type Subtract struct{ left, right Expression }
+// And returns true if both operands are true.
+type And struct{ left, right Expr }
 
-func (s *Subtract) Interpret() int { return s.left.Interpret() - s.right.Interpret() }
+func (a *And) Eval(c *Ctx) bool { return a.left.Eval(c) && a.right.Eval(c) }

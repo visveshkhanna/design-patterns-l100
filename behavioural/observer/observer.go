@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-type Observer interface{ update(price float64) }
+type Observer interface{ update(spend float64) }
 
 type Subject interface {
 	register(o Observer)
@@ -10,32 +10,38 @@ type Subject interface {
 	notifyAll()
 }
 
-type Product struct {
+type Budget struct {
 	observers []Observer
-	price     float64
+	spend     float64
+	limit     float64
 }
 
-func (p *Product) setPrice(price float64) { p.price = price; p.notifyAll() }
+func (b *Budget) addSpend(amt float64) { b.spend += amt; b.notifyAll() }
 
-func (p *Product) register(o Observer) { p.observers = append(p.observers, o) }
+func (b *Budget) register(o Observer) { b.observers = append(b.observers, o) }
 
-func (p *Product) unregister(o Observer) {
-	for i, ob := range p.observers {
+func (b *Budget) unregister(o Observer) {
+	for i, ob := range b.observers {
 		if ob == o {
-			p.observers = append(p.observers[:i], p.observers[i+1:]...)
+			b.observers = append(b.observers[:i], b.observers[i+1:]...)
 			break
 		}
 	}
 }
 
-func (p *Product) notifyAll() {
-	for _, o := range p.observers {
-		o.update(p.price)
+func (b *Budget) notifyAll() {
+	for _, o := range b.observers {
+		o.update(b.spend)
 	}
 }
 
-type EmailSubscriber struct{ email string }
+type SMSAlert struct {
+	phone     string
+	threshold float64
+}
 
-func (e *EmailSubscriber) update(price float64) {
-	fmt.Println("Email to", e.email, "new price:", price)
+func (s *SMSAlert) update(spend float64) {
+	if spend >= s.threshold {
+		fmt.Println("SMS to", s.phone, "budget reached:", spend)
+	}
 }

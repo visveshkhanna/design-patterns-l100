@@ -1,5 +1,6 @@
 package main
 
-type Add struct{ left, right Expression }
+// Or returns true if either operand is true.
+type Or struct{ left, right Expr }
 
-func (a *Add) Interpret() int { return a.left.Interpret() + a.right.Interpret() }
+func (o *Or) Eval(c *Ctx) bool { return o.left.Eval(c) || o.right.Eval(c) }

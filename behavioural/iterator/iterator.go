@@ -2,7 +2,5 @@ package main
 
 type Iterator interface {
 	hasNext() bool
-	next() int
+	next() LogEntry
 }
-
-

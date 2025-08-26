@@ -2,17 +2,36 @@ package main
 
 import "fmt"
 
-type State interface{ pressPlay(ctx *Player) }
+type State interface {
+	submit(ctx *Document)
+	approve(ctx *Document)
+	reject(ctx *Document)
+}
 
-type Player struct{ state State }
+type Document struct {
+	state State
+	title string
+}
 
-func (p *Player) setState(s State) { p.state = s }
-func (p *Player) pressPlay()       { p.state.pressPlay(p) }
+func (d *Document) setState(s State) { d.state = s }
+func (d *Document) submit()          { d.state.submit(d) }
+func (d *Document) approve()         { d.state.approve(d) }
+func (d *Document) reject()          { d.state.reject(d) }
 
-type PlayingState struct{}
+type Draft struct{}
 
-type PausedState struct{}
+type Review struct{}
 
-func (PlayingState) pressPlay(ctx *Player) { fmt.Println("Pausing"); ctx.setState(PausedState{}) }
+type Published struct{}
 
-func (PausedState) pressPlay(ctx *Player) { fmt.Println("Playing"); ctx.setState(PlayingState{}) }
+func (Draft) submit(ctx *Document)  { fmt.Println("-> Review"); ctx.setState(Review{}) }
+func (Draft) approve(ctx *Document) { fmt.Println("noop") }
+func (Draft) reject(ctx *Document)  { fmt.Println("noop") }
+
+func (Review) submit(ctx *Document)  { fmt.Println("noop") }
+func (Review) approve(ctx *Document) { fmt.Println("-> Published"); ctx.setState(Published{}) }
+func (Review) reject(ctx *Document)  { fmt.Println("-> Draft"); ctx.setState(Draft{}) }
+
+func (Published) submit(ctx *Document)  { fmt.Println("noop") }
+func (Published) approve(ctx *Document) { fmt.Println("noop") }
+func (Published) reject(ctx *Document)  { fmt.Println("noop") }

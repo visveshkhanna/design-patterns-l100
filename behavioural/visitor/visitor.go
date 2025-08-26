@@ -3,24 +3,22 @@ package main
 import "fmt"
 
 type Visitor interface {
-	visitCircle(*Circle)
-	visitSquare(*Square)
+	visitForest(*Forest)
+	visitCity(*City)
 }
 
 type Element interface{ accept(Visitor) }
 
-type Circle struct{ radius int }
+type Forest struct{ trees int }
 
-type Square struct{ side int }
+type City struct{ buildings int }
 
-func (c *Circle) accept(v Visitor) { v.visitCircle(c) }
+func (f *Forest) accept(v Visitor) { v.visitForest(f) }
 
-func (s *Square) accept(v Visitor) { v.visitSquare(s) }
+func (c *City) accept(v Visitor) { v.visitCity(c) }
 
-type AreaCalculator struct{}
+type MapPrinter struct{}
 
-func (AreaCalculator) visitCircle(c *Circle) {
-	fmt.Println("Area of circle:", 3.14*float64(c.radius*c.radius))
-}
+func (MapPrinter) visitForest(f *Forest) { fmt.Println("Forest:", f.trees, "trees") }
 
-func (AreaCalculator) visitSquare(s *Square) { fmt.Println("Area of square:", s.side*s.side) }
+func (MapPrinter) visitCity(c *City) { fmt.Println("City:", c.buildings, "buildings") }

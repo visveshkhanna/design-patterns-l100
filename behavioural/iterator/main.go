@@ -3,9 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	c := &IntCollection{items: []int{1, 2, 3, 4}}
-	it := c.createIterator()
+	l := &Log{entries: []LogEntry{
+		{Level: "INFO", Msg: "server started"},
+		{Level: "WARN", Msg: "cache miss"},
+		{Level: "ERROR", Msg: "db timeout"},
+	}}
+	it := l.createIterator()
 	for it.hasNext() {
-		fmt.Println(it.next())
+		e := it.next()
+		fmt.Println(e.Level+":", e.Msg)
 	}
 }

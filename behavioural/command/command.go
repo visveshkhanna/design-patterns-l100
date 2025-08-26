@@ -5,10 +5,21 @@ type Command interface {
 	execute()
 }
 
-type OnCommand struct{ device *Light }
+type AddWaterCommand struct {
+	machine *CoffeeMachine
+	ml      int
+}
 
-type OffCommand struct{ device *Light }
+type AddBeansCommand struct {
+	machine *CoffeeMachine
+	gr      int
+}
 
-func (c *OnCommand) execute() { c.device.on() }
+type BrewEspressoCommand struct{ machine *CoffeeMachine }
 
-func (c *OffCommand) execute() { c.device.off() }
+type CleanCommand struct{ machine *CoffeeMachine }
+
+func (c *AddWaterCommand) execute()     { c.machine.addWater(c.ml) }
+func (c *AddBeansCommand) execute()     { c.machine.addBeans(c.gr) }
+func (c *BrewEspressoCommand) execute() { c.machine.brewEspresso() }
+func (c *CleanCommand) execute()        { c.machine.clean() }

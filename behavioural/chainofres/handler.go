@@ -1,10 +1,8 @@
 package main
 
-import "fmt"
-
 type Handler interface {
 	SetNext(next Handler)
-	Handle(request string)
+	Handle(msg *Message)
 }
 
 type BaseHandler struct {
@@ -15,10 +13,15 @@ func (b *BaseHandler) SetNext(next Handler) {
 	b.next = next
 }
 
-func (b *BaseHandler) callNext(request string) {
+func (b *BaseHandler) callNext(msg *Message) {
 	if b.next != nil {
-		b.next.Handle(request)
-	} else {
-		fmt.Println("End of chain.")
+		b.next.Handle(msg)
 	}
+}
+
+type Message struct {
+	Text     string
+	Flags    []string
+	Rejected bool
+	Reason   string
 }
