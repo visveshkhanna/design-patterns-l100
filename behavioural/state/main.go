@@ -1,8 +1,15 @@
 package main
 
+import (
+	"design-patterns/behavioural/state/context"
+	"design-patterns/behavioural/state/states"
+)
+
 func main() {
-	d := &Document{state: Draft{}, title: "Proposal"}
-	d.submit()  // -> Review
-	d.approve() // -> Published
-	d.reject()  // noop
+
+	d := context.NewDocument("Proposal", states.Draft{})
+
+	d.Submit()
+	d.Approve()
+	d.Reject()
 }

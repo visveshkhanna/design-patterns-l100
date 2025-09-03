@@ -1,15 +1,14 @@
 package main
 
-func main() {
-	gh := &Greenhouse{}
-	fan := &Fan{mediator: gh}
-	heater := &Heater{mediator: gh}
-	sensor := &Sensor{mediator: gh}
-	gh.fan = fan
-	gh.heater = heater
-	gh.sensor = sensor
+import "design-patterns/behavioural/mediator/mediator"
 
-	sensor.tempHot()
-	sensor.tempCold()
-	sensor.tempOk()
+func main() {
+
+	gh := mediator.NewGreenhouse()
+
+	sensor := gh.GetSensor()
+
+	sensor.TempHot()
+	sensor.TempCold()
+	sensor.TempOk()
 }

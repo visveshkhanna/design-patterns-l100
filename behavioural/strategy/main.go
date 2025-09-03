@@ -1,8 +1,15 @@
 package main
 
+import (
+	"design-patterns/behavioural/strategy/context"
+	"design-patterns/behavioural/strategy/strategies"
+)
+
 func main() {
-	r := &Ride{strategy: Economy{}}
-	r.printQuote(12)
-	r.setStrategy(Premium{})
-	r.printQuote(12)
+
+	r := context.NewRide(&strategies.Economy{})
+	r.PrintQuote(12)
+
+	r.SetStrategy(&strategies.Premium{})
+	r.PrintQuote(12)
 }

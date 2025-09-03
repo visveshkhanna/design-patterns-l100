@@ -1,9 +1,21 @@
 package main
 
+import (
+	"design-patterns/behavioural/visitor/elements"
+	"design-patterns/behavioural/visitor/interfaces"
+	"design-patterns/behavioural/visitor/visitors"
+)
+
 func main() {
-	zones := []Element{&Forest{trees: 120}, &City{buildings: 45}}
-	printer := MapPrinter{}
-	for _, z := range zones {
-		z.accept(printer)
+
+	zones := []interfaces.Element{
+		elements.NewForest(120),
+		elements.NewCity(45),
+	}
+
+	printer := visitors.NewMapPrinter()
+
+	for _, zone := range zones {
+		zone.Accept(printer)
 	}
 }
