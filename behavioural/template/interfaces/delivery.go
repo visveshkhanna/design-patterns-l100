@@ -1,6 +1,6 @@
 package interfaces
 
-type Delivery interface {
+type IDelivery interface {
 	Prepare()
 	Dispatch()
 	Report()

@@ -1,16 +1,20 @@
 package main
 
+import (
+	"design-patterns/structural/adapter/adapters"
+	"design-patterns/structural/adapter/client"
+	"design-patterns/structural/adapter/devices"
+)
+
 func main() {
 
-    client := &Client{}
-    mac := &Mac{}
+	c := &client.Client{}
 
-    client.InsertLightningConnectorIntoComputer(mac)
+	mac := &devices.Mac{}
+	c.InsertLightningConnectorIntoComputer(mac)
 
-    windowsMachine := &Windows{}
-    windowsMachineAdapter := &WindowsAdapter{
-        windowMachine: windowsMachine,
-    }
+	windowsMachine := &devices.Windows{}
 
-    client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
+	windowsAdapter := adapters.NewWindowsAdapter(windowsMachine)
+	c.InsertLightningConnectorIntoComputer(windowsAdapter)
 }

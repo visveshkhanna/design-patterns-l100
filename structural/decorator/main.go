@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+
+	"design-patterns/structural/decorator/components"
+	"design-patterns/structural/decorator/decorators"
 )
 
 func main() {
-	base := NewEspresso()
-	withMilk := WithMilk(base)
-	withMilkAndSugar := WithSugar(withMilk)
+	base := components.NewEspresso()
+	withMilk := decorators.WithMilk(base)
+	withMilkAndSugar := decorators.WithSugar(withMilk)
 
 	fmt.Printf("Order 1: %s => %d\n", base.Description(), base.Cost())
 	fmt.Printf("Order 2: %s => %d\n", withMilk.Description(), withMilk.Cost())

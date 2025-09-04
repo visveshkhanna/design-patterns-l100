@@ -1,7 +1,7 @@
 package interfaces
 
-type Subject interface {
-	Register(observer Observer)
-	Unregister(observer Observer)
+type ISubject interface {
+	Register(observer IObserver)
+	Unregister(observer IObserver)
 	NotifyAll()
 }

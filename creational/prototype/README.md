@@ -10,10 +10,10 @@ go run .
 ```
 
 Files:
-- `inode.go`: prototype interface
-- `file.go`: leaf node clone/print
-- `folder.go`: composite node deep-clone/print
-- `main.go`: E2E demo building and cloning a tree
+- `interfaces/prototype.go`: prototype interface definition
+- `models/file.go`: file implementation with clone/print methods
+- `models/folder.go`: folder implementation with deep-clone/print methods
+- `main.go`: demonstration of building and cloning a filesystem tree
 
 Why this design:
 - **Fast duplication**: copy existing structures without reconfiguration

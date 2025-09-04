@@ -3,7 +3,7 @@ package template
 import "design-patterns/behavioural/template/interfaces"
 
 type DeliveryTemplate struct {
-	Delivery interfaces.Delivery
+	Delivery interfaces.IDelivery
 }
 
 func (t *DeliveryTemplate) Send() {

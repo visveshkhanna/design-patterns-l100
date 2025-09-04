@@ -1,6 +1,6 @@
 package expressions
 
-type Expr interface {
+type IExpr interface {
 	Eval(*Ctx) bool
 }
 

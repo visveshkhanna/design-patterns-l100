@@ -1,13 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"design-patterns/structural/bridge/computers"
+	"design-patterns/structural/bridge/printers"
+	"fmt"
+)
 
 func main() {
+	hpPrinter := &printers.HP{}
+	epsonPrinter := &printers.Epson{}
 
-	hpPrinter := &HP{}
-	epsonPrinter := &Epson{}
-
-	macComputer := &Mac{}
+	macComputer := &computers.Mac{}
 
 	macComputer.SetPrinter(hpPrinter)
 	macComputer.Print()
@@ -17,8 +20,8 @@ func main() {
 	macComputer.Print()
 	fmt.Println()
 
-	windowsComputer := &Windows{}
-	
+	windowsComputer := &computers.Windows{}
+
 	windowsComputer.SetPrinter(hpPrinter)
 	windowsComputer.Print()
 	fmt.Println()
@@ -26,5 +29,4 @@ func main() {
 	windowsComputer.SetPrinter(epsonPrinter)
 	windowsComputer.Print()
 	fmt.Println()
-	
 }

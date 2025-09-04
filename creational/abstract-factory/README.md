@@ -9,13 +9,17 @@ Run:
 go run .
 ```
 
-Files:
-- `primitives.go`: `ThemeFactory` + product interfaces and light/dark implementations
-- `main.go`: E2E demo rendering both themes
+## Structure:
+- `interfaces/`: Core interfaces (Button, Card, ThemeFactory)
+- `themes/`: Concrete implementations for light and dark themes
+- `factory/`: Factory function to create theme instances
+- `main.go`: Demo showing both themes in action
 
-Why this design:
-- Ensures coherent families (light components always match light cards/buttons)
-- Easy to add new themes without touching client code
-- Minimal API keeps focus on the pattern, not UI code
+## Why this design:
+- **Separation of concerns**: Each folder has a clear responsibility
+- **Coherent families**: Light components always match light cards/buttons
+- **Easy extensibility**: Add new themes without touching client code
+- **Clean imports**: Clear dependencies between packages
+- **Minimal API**: Keeps focus on the pattern, not implementation details
 
 

@@ -6,14 +6,14 @@ import (
 )
 
 type Ride struct {
-	strategy interfaces.PricingStrategy
+	strategy interfaces.IPricingStrategy
 }
 
-func NewRide(strategy interfaces.PricingStrategy) *Ride {
+func NewRide(strategy interfaces.IPricingStrategy) *Ride {
 	return &Ride{strategy: strategy}
 }
 
-func (r *Ride) SetStrategy(strategy interfaces.PricingStrategy) {
+func (r *Ride) SetStrategy(strategy interfaces.IPricingStrategy) {
 	r.strategy = strategy
 }
 

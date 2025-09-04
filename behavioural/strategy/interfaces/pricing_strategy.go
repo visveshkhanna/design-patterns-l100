@@ -1,5 +1,5 @@
 package interfaces
 
-type PricingStrategy interface {
+type IPricingStrategy interface {
 	Price(distanceKm float64) float64
 }

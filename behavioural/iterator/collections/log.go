@@ -13,6 +13,6 @@ func NewLog(entries []models.LogEntry) *Log {
 	return &Log{entries: entries}
 }
 
-func (l *Log) CreateIterator() iterators.Iterator {
+func (l *Log) CreateIterator() iterators.IIterator {
 	return iterators.NewLogIterator(l.entries)
 }

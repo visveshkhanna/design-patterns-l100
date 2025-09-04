@@ -1,5 +1,5 @@
 package interfaces
 
-type Mediator interface {
+type IMediator interface {
 	Notify(sender string, event string)
 }

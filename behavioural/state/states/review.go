@@ -7,16 +7,16 @@ import (
 
 type Review struct{}
 
-func (Review) Submit(ctx interfaces.Context) {
+func (Review) Submit(ctx interfaces.IContext) {
 	fmt.Println("Document is already under review")
 }
 
-func (Review) Approve(ctx interfaces.Context) {
+func (Review) Approve(ctx interfaces.IContext) {
 	fmt.Println("Document approved and published")
 	ctx.SetState(Published{})
 }
 
-func (Review) Reject(ctx interfaces.Context) {
+func (Review) Reject(ctx interfaces.IContext) {
 	fmt.Println("Document rejected, back to draft")
 	ctx.SetState(Draft{})
 }

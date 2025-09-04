@@ -3,10 +3,10 @@ package components
 import "design-patterns/behavioural/mediator/interfaces"
 
 type Sensor struct {
-	mediator interfaces.Mediator
+	mediator interfaces.IMediator
 }
 
-func NewSensor(m interfaces.Mediator) *Sensor {
+func NewSensor(m interfaces.IMediator) *Sensor {
 	return &Sensor{
 		mediator: m,
 	}

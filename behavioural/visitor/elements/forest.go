@@ -10,7 +10,7 @@ func NewForest(trees int) *Forest {
 	return &Forest{trees: trees}
 }
 
-func (f *Forest) Accept(visitor interfaces.Visitor) {
+func (f *Forest) Accept(visitor interfaces.IVisitor) {
 	visitor.VisitForest(f)
 }
 

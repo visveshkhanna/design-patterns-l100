@@ -3,11 +3,11 @@ package components
 import "design-patterns/behavioural/mediator/interfaces"
 
 type Fan struct {
-	mediator interfaces.Mediator
+	mediator interfaces.IMediator
 	onState  bool
 }
 
-func NewFan(m interfaces.Mediator) *Fan {
+func NewFan(m interfaces.IMediator) *Fan {
 	return &Fan{
 		mediator: m,
 		onState:  false,

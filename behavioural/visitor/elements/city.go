@@ -10,7 +10,7 @@ func NewCity(buildings int) *City {
 	return &City{buildings: buildings}
 }
 
-func (c *City) Accept(visitor interfaces.Visitor) {
+func (c *City) Accept(visitor interfaces.IVisitor) {
 	visitor.VisitCity(c)
 }
 

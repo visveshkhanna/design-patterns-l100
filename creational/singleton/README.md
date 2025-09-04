@@ -9,12 +9,29 @@ Run:
 go run .
 ```
 
-Files:
-- `main.go`: singleton type, `GetSignaturePen`, and E2E demo
+## Structure
 
-Why this design:
+```
+singleton/
+├── models/
+│   └── signature_pen.go    # SignaturePen struct and methods
+├── singleton/
+│   └── pen_manager.go      # Singleton logic with GetSignaturePen()
+├── main.go                 # Demo and usage example
+└── README.md              # This file
+```
+
+## Files
+
+- `models/signature_pen.go`: Defines the `SignaturePen` struct and its methods
+- `singleton/pen_manager.go`: Contains singleton logic using `sync.Once`
+- `main.go`: Demonstrates singleton usage and verification
+
+## Why this design
+
 - **Thread-safe**: `sync.Once` guarantees one-time initialization
-- **Simple API**: a single accessor function
+- **Simple API**: a single accessor function `GetSignaturePen()`
+- **Separation of concerns**: Model, singleton logic, and demo are in separate files
 - **Demonstrably single**: prints the equality of two retrieved instances
 
 

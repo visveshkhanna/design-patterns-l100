@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	zones := []interfaces.Element{
+	zones := []interfaces.IElement{
 		elements.NewForest(120),
 		elements.NewCity(45),
 	}

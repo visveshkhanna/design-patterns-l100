@@ -1,6 +1,6 @@
 package interfaces
 
-type Visitor interface {
-	VisitForest(forest ForestElement)
-	VisitCity(city CityElement)
+type IVisitor interface {
+	VisitForest(forest IForestElement)
+	VisitCity(city ICityElement)
 }

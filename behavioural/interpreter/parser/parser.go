@@ -27,11 +27,11 @@ func (p *Parser) nextToken() {
 	p.peekToken = p.lexer.NextToken()
 }
 
-func (p *Parser) ParseExpression() (expressions.Expr, error) {
+func (p *Parser) ParseExpression() (expressions.IExpr, error) {
 	return p.parseOrExpression()
 }
 
-func (p *Parser) parseOrExpression() (expressions.Expr, error) {
+func (p *Parser) parseOrExpression() (expressions.IExpr, error) {
 	expr, err := p.parseAndExpression()
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (p *Parser) parseOrExpression() (expressions.Expr, error) {
 	return expr, nil
 }
 
-func (p *Parser) parseAndExpression() (expressions.Expr, error) {
+func (p *Parser) parseAndExpression() (expressions.IExpr, error) {
 	expr, err := p.parsePrimaryExpression()
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func (p *Parser) parseAndExpression() (expressions.Expr, error) {
 	return expr, nil
 }
 
-func (p *Parser) parsePrimaryExpression() (expressions.Expr, error) {
+func (p *Parser) parsePrimaryExpression() (expressions.IExpr, error) {
 	switch p.curToken.Type {
 	case LPAREN:
 		return p.parseGroupedExpression()
@@ -78,7 +78,7 @@ func (p *Parser) parsePrimaryExpression() (expressions.Expr, error) {
 	}
 }
 
-func (p *Parser) parseGroupedExpression() (expressions.Expr, error) {
+func (p *Parser) parseGroupedExpression() (expressions.IExpr, error) {
 	p.nextToken()
 
 	expr, err := p.parseOrExpression()
@@ -94,7 +94,7 @@ func (p *Parser) parseGroupedExpression() (expressions.Expr, error) {
 	return expr, nil
 }
 
-func (p *Parser) parseIdentifierExpression() (expressions.Expr, error) {
+func (p *Parser) parseIdentifierExpression() (expressions.IExpr, error) {
 	identifier := p.curToken.Literal
 
 	if identifier == "beta" {
@@ -145,7 +145,7 @@ func (p *Parser) parseIdentifierExpression() (expressions.Expr, error) {
 	return nil, fmt.Errorf("unexpected token after identifier '%s': %s at position %d", identifier, p.curToken.Type, p.curToken.Pos)
 }
 
-func Parse(input string) (expressions.Expr, error) {
+func Parse(input string) (expressions.IExpr, error) {
 	lexer := NewLexer(input)
 	parser := NewParser(lexer)
 	return parser.ParseExpression()

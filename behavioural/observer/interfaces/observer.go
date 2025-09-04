@@ -1,5 +1,5 @@
 package interfaces
 
-type Observer interface {
+type IObserver interface {
 	Update(spend float64)
 }

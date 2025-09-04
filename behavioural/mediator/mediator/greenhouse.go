@@ -12,7 +12,7 @@ type Greenhouse struct {
 	sensor *components.Sensor
 }
 
-var _ interfaces.Mediator = (*Greenhouse)(nil)
+var _ interfaces.IMediator = (*Greenhouse)(nil)
 
 func NewGreenhouse() *Greenhouse {
 	gh := &Greenhouse{}

@@ -1,6 +1,5 @@
 package expressions
 
-// Predicates
 type IsRole struct{ Role string }
 type IsRegion struct{ Region string }
 type IsBeta struct{}

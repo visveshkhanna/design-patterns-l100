@@ -3,18 +3,18 @@ package context
 import "design-patterns/behavioural/state/interfaces"
 
 type Document struct {
-	state interfaces.State
+	state interfaces.IState
 	Title string
 }
 
-func NewDocument(title string, initialState interfaces.State) *Document {
+func NewDocument(title string, initialState interfaces.IState) *Document {
 	return &Document{
 		state: initialState,
 		Title: title,
 	}
 }
 
-func (d *Document) SetState(s interfaces.State) {
+func (d *Document) SetState(s interfaces.IState) {
 	d.state = s
 }
 

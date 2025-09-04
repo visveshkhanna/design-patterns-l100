@@ -3,11 +3,11 @@ package components
 import "design-patterns/behavioural/mediator/interfaces"
 
 type Heater struct {
-	mediator interfaces.Mediator
+	mediator interfaces.IMediator
 	onState  bool
 }
 
-func NewHeater(m interfaces.Mediator) *Heater {
+func NewHeater(m interfaces.IMediator) *Heater {
 	return &Heater{
 		mediator: m,
 		onState:  false,

@@ -2,16 +2,16 @@ package handlers
 
 import "design-patterns/behavioural/chainofres/models"
 
-type Handler interface {
-	SetNext(next Handler)
+type IHandler interface {
+	SetNext(next IHandler)
 	Handle(msg *models.Message)
 }
 
 type BaseHandler struct {
-	next Handler
+	next IHandler
 }
 
-func (b *BaseHandler) SetNext(next Handler) {
+func (b *BaseHandler) SetNext(next IHandler) {
 	b.next = next
 }
 

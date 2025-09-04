@@ -2,7 +2,7 @@ package iterators
 
 import "design-patterns/behavioural/iterator/models"
 
-type Iterator interface {
+type IIterator interface {
 	HasNext() bool
 	Next() models.LogEntry
 }

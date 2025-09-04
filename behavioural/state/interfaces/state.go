@@ -1,11 +1,11 @@
 package interfaces
 
-type State interface {
-	Submit(ctx Context)
-	Approve(ctx Context)
-	Reject(ctx Context)
+type IState interface {
+	Submit(ctx IContext)
+	Approve(ctx IContext)
+	Reject(ctx IContext)
 }
 
-type Context interface {
-	SetState(s State)
+type IContext interface {
+	SetState(s IState)
 }

@@ -11,10 +11,10 @@ func NewMapPrinter() *MapPrinter {
 	return &MapPrinter{}
 }
 
-func (mp *MapPrinter) VisitForest(forest interfaces.ForestElement) {
+func (mp *MapPrinter) VisitForest(forest interfaces.IForestElement) {
 	fmt.Printf("Forest: %d trees\n", forest.GetTrees())
 }
 
-func (mp *MapPrinter) VisitCity(city interfaces.CityElement) {
+func (mp *MapPrinter) VisitCity(city interfaces.ICityElement) {
 	fmt.Printf("City: %d buildings\n", city.GetBuildings())
 }

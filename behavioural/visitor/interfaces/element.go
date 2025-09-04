@@ -1,15 +1,15 @@
 package interfaces
 
-type Element interface {
-	Accept(visitor Visitor)
+type IElement interface {
+	Accept(visitor IVisitor)
 }
 
-type ForestElement interface {
-	Element
+type IForestElement interface {
+	IElement
 	GetTrees() int
 }
 
-type CityElement interface {
-	Element
+type ICityElement interface {
+	IElement
 	GetBuildings() int
 }
